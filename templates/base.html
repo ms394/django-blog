@@ -13,7 +13,7 @@
 </head>
 <body>
     <header>
-        <div class="headerContent flex container topnav">
+        <div class="headerContent flex container {% if user.is_authenticated %}topnav{%endif%}">
             <div class="logo">
                 <h1><a href="{% url 'blog:home'%}">Django Blog</a></h1>
             </div>
