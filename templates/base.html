@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>Blogs</title>
+</head>
+<body>
+    <header>
+        <div class="headerContent flex container">
+            <div class="logo">
+                <h1><a href="{% url 'blog:home'%}">Django Blog</a></h1>
+            </div>
+            <nav>
+                {% if user.is_authenticated %}
+                <ul class='mobile'>
+                    <li><a class='link' href="{% url 'blog:blog-list' %}">Blogs</a></li>
+                    <li><a class='btn btn-one' href="{% url 'blog:create-blog' %}">Create Blog &#10011;</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+                <!-- <li><a class='link' href="{% url 'blog:blog-list'%}">Home</a></li> -->                
+                <!-- <li>Hello {{ user.username }}</li> -->
+                {%else%}
+                    <ul>    
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a class='btn btn-one' href="{% url 'signup' %}">Signup</a></li>
+                    </ul>  
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    {%block content%}
+
+
+    {%endblock content%}
+
+    <!-- <footer>
+        <p>Copyright © 2021 Django Blogs</p>
+    </footer> -->
+</body>
+</html>

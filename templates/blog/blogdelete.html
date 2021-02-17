@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="formWrapper p100">
+    <div class="container">
+        <form method="post" id='delForm'>
+            {% csrf_token %}
+            <h1>Are you sure you want to delete "{{post.title}}"</h1><br>
+            <a href="{% url 'blog:blog-detail' post.pk %}" class="btn btn-two">Cancel</a>
+            <input type="submit"  value="Confirm" class="btn btn-del">
+        </form>
+    </div>
+</div>
+{% endblock content %}

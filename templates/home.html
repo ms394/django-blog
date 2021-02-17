@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="banner p70">
+    <div class="container grid grid2 bannerContentWrapper">
+        <div class="content">
+            <h1>One place for everything Django related</h1>
+            <p>Rated #1 Django blog for third straight year.</p>
+        </div>
+        <img src="{% static 'assets/banner.svg' %}" alt="">
+    </div>
+</div>
+<div class="blogsList p70">
+    <div class="container">
+        <div class="flex">
+            <h2>Blogs</h2>
+            <a class="moreLink" href="{% url 'blog:blog-list' %}">View All &#10132;</a>
+        </div>
+        <div class="blogsWrapper grid grid3">
+            {% for post in posts|slice:":3" %}
+                <div class="blog" id='{{ post.pk }}'>
+                    <div class="author flex">
+                        <div class="name flex">
+                            <!-- <img src="{% static 'assets/user1.jpg' %}" alt=""> -->
+                            <span>{{post.author.username}}</span>
+                        </div>
+                        
+                        <div class="date">{{post.created_date|date:"F d Y"}}</div>
+                    </div>
+                    <div class="blogContent">
+                        <div class="blogTitle">
+                            <h2><a href="{% url 'blog:blog-detail' post.pk %}">{{post.title}}</a></h2>
+                        </div>
+                        <p>{{post.body|slice:":50"}}..</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

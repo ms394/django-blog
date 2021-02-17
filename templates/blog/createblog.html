@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="formWrapper p50">
+    <div class="container">
+        <h1>Write your Blog</h1><br><br>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-element">
+                <label for="title">Title</label>
+                {{form.title}}
+                {{form.title.errors}}
+            </div>
+            <!-- <div class="form-element">
+                <label for="description">Author</label><br>
+                {{form.author}}
+            </div> -->
+            <div class="form-element">
+                <label for="description">Description</label>
+                {{form.body}}
+                {{form.body.errors}}
+            </div>
+            <div class="form-element">
+                <label for="description">Upload an Image (Optional)</label><br>
+                {{form.image}}
+                {{form.image.errors}}
+            </div>
+            
+            <input type="submit" accept="png" value="Create" class="btn btn-one">
+        </form>
+    </div>
+</div>
+{% endblock content %}

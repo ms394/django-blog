@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="blogDetailsSection p30">
+    <div class="container">
+        <div class="blogDetailContentWrapper">
+            <h1 class="title">{{post.title}}</h1>
+            <div class="author flex">
+                <div class="name flex">
+                    <!-- <img src="{% static 'assets/user1.jpg' %}" alt="" class="authorImg"> -->
+                    <span>{{post.author.username}}</span>
+                </div>
+                <div class="date">{{post.created_date|date:"F d Y"}}</div>
+            </div>
+            {% if post.author == request.user %}
+                <a class='btn btn-two' href="{% url 'blog:blog-update' post.pk %}">Update Blog</a>
+                <a class='btn btn-del' href="{% url 'blog:blog-delete' post.pk %}">Delete Blog</a>
+            {%endif%}
+            {% if post.image %}
+                <img src="{{post.image.url}}" alt="" class="blogImg">
+            {% endif %}
+            <div class="blogDescription">
+                <p>{{post.body}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
