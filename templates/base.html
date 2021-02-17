@@ -5,32 +5,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <title>Blogs</title>
 </head>
 <body>
     <header>
-        <div class="headerContent flex container">
+        <div class="headerContent flex container topnav">
             <div class="logo">
                 <h1><a href="{% url 'blog:home'%}">Django Blog</a></h1>
             </div>
+            {% if user.is_authenticated %}
+            <a href="#" id='hamburger-menu'><i class="fa fa-bars"></i></a>
             <nav>
-                {% if user.is_authenticated %}
-                <ul class='mobile'>
+                <ul id='mobile'>
                     <li><a class='link' href="{% url 'blog:blog-list' %}">Blogs</a></li>
                     <li><a class='btn btn-one' href="{% url 'blog:create-blog' %}">Create Blog &#10011;</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                 </ul>
-                <!-- <li><a class='link' href="{% url 'blog:blog-list'%}">Home</a></li> -->                
-                <!-- <li>Hello {{ user.username }}</li> -->
-                {%else%}
+            </nav>
+            
+            <!-- <li><a class='link' href="{% url 'blog:blog-list'%}">Home</a></li> -->                
+            <!-- <li>Hello {{ user.username }}</li> -->
+            {%else%}
+                <nav>
                     <ul>    
                         <li><a href="{% url 'login' %}">Login</a></li>
                         <li><a class='btn btn-one' href="{% url 'signup' %}">Signup</a></li>
-                    </ul>  
-                {% endif %}
-            </nav>
+                    </ul>
+                </nav>
+                  
+            {% endif %}
         </div>
     </header>
 
@@ -43,4 +50,19 @@
         <p>Copyright © 2021 Django Blogs</p>
     </footer> -->
 </body>
+<script>
+    function toggleHamburgerMenu() {
+    var x = document.getElementById("mobile");
+    if (x.style.display === "grid") {
+      x.style.display = "none";
+      document.querySelector(".fa").classList.remove('fa-times')
+      document.querySelector(".fa").classList.add('fa-bars')
+    } else {
+      x.style.display = "grid";
+      document.querySelector(".fa").classList.add('fa-times')
+      document.querySelector(".fa").classList.remove('fa-bars')
+    }
+  }
+    document.querySelector('#hamburger-menu').addEventListener('click', toggleHamburgerMenu)
+</script>
 </html>

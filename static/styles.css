@@ -328,6 +328,48 @@ textarea{
     header .logo h1 a{
         font-size: 18px
     }
+    header .topnav{
+        display: grid;
+        grid-template-rows: auto auto auto;
+        justify-content: space-between;
+        
+    }
+    ul li .link{
+        padding: 5px 0;
+    }
+    ul li .link:hover{
+        border: none;
+    }
+    header .logo{
+        grid-column: 1/2;
+    }
+    header #hamburger-menu{
+        display: block;
+        grid-column: 2/3;
+    }
+    header nav ul#mobile{
+        display: none;
+        transition: 0.5s ease-in-out all;
+    }
+    header nav ul#mobile {
+        transition: 1s ease-in-out all;
+        grid-column: 1/2;
+        grid-template-rows: 1fr 1fr 1fr;
+    }  
+    header nav ul#mobile li{
+        margin-left: 0px;
+        margin-bottom:10px;
+    }
+    header nav ul#mobile li a.btn{
+        display: inline-block;
+    }
+    header nav ul li:first-child{
+        margin-top: 10px;
+    }
+    header nav ul li:last-child{
+        margin-bottom: 0px;
+    }
+
     .p70{
         padding: 35px 0
     }
@@ -337,7 +379,7 @@ textarea{
     .content h1{
         font-size: 24px;
     }
-    .content img{
+    .bannerContentWrapper img{
         width: 80%;
     }
     .grid3 {
@@ -348,5 +390,30 @@ textarea{
     }
     .blogTitle h2 a{
         font-size: 18px;
+    }
+
+    .blogDetailContentWrapper .title{
+        font-size: 24px;
+    }
+    .formWrapper .container h1 {
+        font-size: 24px;
+    }
+    input[type=text], textarea, input[type=password]{
+        font-size: 16px;
+    }
+    textarea{
+        line-height: 1.7;
+    }
+    .gridWrapper {
+        grid-template-columns: none;
+    }
+    #signInImg{
+        display: none;
+    }
+    #loginImg{
+        display: none;
+    }
+    .btn-one{
+        font-size:14px
     }
 }
