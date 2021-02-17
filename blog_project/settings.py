@@ -10,7 +10,7 @@ SECRET_KEY = 'wnld*(-m40lxluv%%fk5ual^jfa6!k5-c)@8ncq&%a0g$2_6ks'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mohsin-django-blog.herokuapp.com']
 
 
 # Application definition
