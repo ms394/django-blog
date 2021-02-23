@@ -114,7 +114,10 @@ ul li{
 header {
     padding: 20px 0;
 }
-
+header #hamburger-menu{
+    display: none;
+    
+}
 
 header .logo h1 a{
     color: var(--tertiaryColor);

@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post
 from .forms import PostForm
 from django.urls import reverse_lazy, reverse
-
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 class HomePageView(ListView):
@@ -13,26 +13,29 @@ class HomePageView(ListView):
     ordering = ['-created_date']
 
 
-class BlogListView(ListView):
+class BlogListView(LoginRequiredMixin,ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'blog/bloglist.html'
     ordering = ['-created_date']
+    login_url = 'login'
 
     def get_queryset(self):
         return Post.objects.order_by('-created_date')
 
 
-class BlogDetailView(DetailView):
+class BlogDetailView(LoginRequiredMixin,DetailView):
     model = Post
     context_object_name = 'post'
     template_name = 'blog/blogdetail.html'
+    login_url = 'login'
 
 
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin,CreateView):
     model = Post
     fields = ['title', 'body', 'image']
     template_name = 'blog/createblog.html'
+    login_url = 'login'
 
     def form_valid(self,form):
         blog = form.save(commit=False)
@@ -45,14 +48,24 @@ class BlogCreateView(CreateView):
 
 
 
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Post
     fields = ['title','body', 'image']
     template_name = 'blog/blogupdate.html'
+    login_url = 'login'
+
+    def test_func(self): 
+        obj = self.get_object()
+        return obj.author == self.request.user
 
 
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'blog/blogdelete.html'
     success_url = reverse_lazy('blog:blog-list')
+    login_url = 'login'
+
+    def test_func(self): 
+        obj = self.get_object()
+        return obj.author == self.request.user
